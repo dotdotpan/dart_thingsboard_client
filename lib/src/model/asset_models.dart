@@ -41,7 +41,11 @@ class AssetProfile extends BaseData<AssetProfileId>
       : tenantId = TenantId.fromJson(json['tenantId']),
         name = json['name'],
         description = json['description'],
-        version = json['version'],
+        version = json['version'] != null
+            ? (json['version'] is num)
+            ? (json['version'] as num).toDouble()
+            : null
+            : null,
         isDefault = json['default'],
         image = json['image'],
         defaultRuleChainId = json['defaultRuleChainId'] != null
